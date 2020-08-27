@@ -2,7 +2,7 @@
 
 namespace Paksuco\Settings\Components;
 
-class Settings extends \Livewire\Component
+class Management extends \Livewire\Component
 {
 
     public function mount()
@@ -11,6 +11,6 @@ class Settings extends \Livewire\Component
 
     public function render()
     {
-        return view("paksuco-settings::admin.settings");
+        return view("paksuco-settings::admin.management");
     }
 }

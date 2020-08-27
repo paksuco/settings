@@ -10,5 +10,6 @@ Route::group([
     'prefix' => config("settings-ui.admin_route_prefix", ""),
     'as' => 'paksuco.',
 ], function () {
-    Route::get('/settings', "\Paksuco\Settings\Controllers\SettingsController@index")->name("settings.admin");
+    Route::get('/settings', "\Paksuco\Settings\Controllers\SettingsController@settings")->name("settings.admin");
+    Route::get('/settings/management', "\Paksuco\Settings\Controllers\SettingsController@management")->name("settings.management");
 });

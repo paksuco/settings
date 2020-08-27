@@ -17,6 +17,7 @@ class CreateOptionsTables extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('type');
+            $table->string('props');
             $table->string('value');
             $table->timestamps();
             $table->softDeletes();
