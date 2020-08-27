@@ -1,22 +1,22 @@
 <div>
-    <h1>Category administration</h1>
+    <h1>Option administration</h1>
     <div>
-        <h2>Add new Category</h2>
+        <h2>Add new Option</h2>
         <div>
             <div>Name</div>
-            <div><input type="text" name="category_name" id="category_name"></div>
+            <div><input type="text" name="option_name" id="option_name"></div>
             <div>Parent</div>
             <div>
-                <select name="parent_category" id="parent_category">
+                <select name="parent_option" id="parent_option">
                     <option value="">-- No Parent --</option>
                 </select>
             </div>
         </div>
     </div>
     <div>
-        <h2>Current Category List</h2>
+        <h2>Current Option List</h2>
         <div>
-            @livewire('paksuco-table::table', $config)
+
         </div>
     </div>
 </div>

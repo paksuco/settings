@@ -1,6 +1,6 @@
 @extends($extends)
 @section("content")
 <div>
-    @livewire("paksuco-categories::categories")
+    @livewire("paksuco-settings::settings")
 </div>
 @endsection

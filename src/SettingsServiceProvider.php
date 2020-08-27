@@ -1,6 +1,6 @@
 <?php
 
-namespace Paksuco\Categories;
+namespace Paksuco\Settings;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -77,7 +77,7 @@ class SettingsServiceProvider extends ServiceProvider
 
         $this->publishes([__DIR__ . '/../views' => base_path('resources/views/paksuco/settings')]);
 
-        Livewire::component("paksuco-categories::settings", Components\Settings::class);
+        Livewire::component("paksuco-settings::settings", Components\Settings::class);
     }
 
     private function handleMigrations()

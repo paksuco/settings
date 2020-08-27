@@ -14,7 +14,7 @@ Edit `composer.json` to reflect the package information. At a minimum, the packa
     "name": "vendor/package",
     "autoload": {
         "psr-4": {
-            "Paksuco\\Categories\\": "src/"
+            "Paksuco\\Settings\\": "src/"
         }
     },
 },
