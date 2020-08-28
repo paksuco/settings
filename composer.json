@@ -41,7 +41,7 @@
         "Paksuco\\Settings\\SettingsServiceProvider"
       ],
       "aliases": {
-        "Package": "Paksuco\\Settings\\Facade"
+        "Settings": "Paksuco\\Settings\\Facade"
       }
     }
   },

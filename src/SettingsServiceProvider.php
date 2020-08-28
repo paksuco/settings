@@ -33,11 +33,13 @@ class SettingsServiceProvider extends ServiceProvider
                 if ($container->hasItem("Settings") == false) {
                     $container->addItem("Settings", "#", "fa fa-tools", function ($menu) {
                         $menu->addItem("Configuration", route("paksuco.settings.admin"), "fa fa-cogs")
-                            ->addItem("Config Mgmt.", route("paksuco.settings.management"), "fa fa-cog");
+                            ->addItem("Fields", route("paksuco.settings.management"), "fa fa-cog");
                     });
                 }
             }
         });
+
+        $this->app->bind("settings", Services\Settings::class);
     }
 
     /**
