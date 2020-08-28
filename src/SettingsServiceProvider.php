@@ -78,7 +78,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../views', 'paksuco-settings');
 
-        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/paksuco/settings')]);
+        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-settings')]);
 
         Livewire::component("paksuco-settings::settings", Components\Settings::class);
         Livewire::component("paksuco-settings::management", Components\Management::class);
