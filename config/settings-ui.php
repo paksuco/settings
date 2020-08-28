@@ -20,4 +20,8 @@ return [
      * Your admin template layout to extend
      */
     'template_to_extend' => "layouts.app",
+
+    'field_types' => [
+        \Paksuco\Settings\Fields\TextInput::class
+    ]
 ];

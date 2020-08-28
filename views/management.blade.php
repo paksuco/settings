@@ -11,8 +11,7 @@
             interdum lacus ut sem consectetur elementum. Proin pellentesque maximus sem sed rhoncus. Cras eget
             neque a nisi posuere mollis vitae vitae magna. Praesent non volutpat sem, a maximus libero. </p>
         <p>&nbsp;</p>
-        <h3 class="text-2xl font-semibold mb-3" style="line-height: 1em">@lang("Defined Fields")</h3>
-        @livewire("paksuco-settings::management")
+        @livewire("paksuco-settings::management", [], key("mgmtform"))
     </div>
 </div>
 @endsection

@@ -4,6 +4,7 @@ namespace Paksuco\Settings;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 
 class SettingsServiceProvider extends ServiceProvider
@@ -84,6 +85,12 @@ class SettingsServiceProvider extends ServiceProvider
 
         Livewire::component("paksuco-settings::settings", Components\Settings::class);
         Livewire::component("paksuco-settings::management", Components\Management::class);
+
+        $fieldTypes = config("settings-ui.field_types", []);
+
+        foreach ($fieldTypes as $fieldType) {
+            Livewire::component("paksuco-settings::" . Str::slug(class_basename($fieldType)), $fieldType);
+        }
     }
 
     private function handleMigrations()
