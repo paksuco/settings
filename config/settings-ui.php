@@ -22,6 +22,9 @@ return [
     'template_to_extend' => "layouts.app",
 
     'field_types' => [
-        \Paksuco\Settings\Fields\TextInput::class
+        \Paksuco\Settings\Fields\TextInput::class,
+        \Paksuco\Settings\Fields\SelectInput::class,
+        \Paksuco\Settings\Fields\Repeater::class,
+        \Paksuco\Settings\Fields\Checkbox::class
     ]
 ];

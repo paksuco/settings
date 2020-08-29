@@ -3,21 +3,26 @@
 namespace Paksuco\Settings\Components;
 
 use Illuminate\Support\Str;
+use Paksuco\Settings\Facades\Settings;
 use Paksuco\Settings\Models\Option;
 use Paksuco\Settings\Traits\HasDynamicSettings;
 
 class Management extends \Livewire\Component
 {
+    use HasDynamicSettings;
+
     public $options;
     public $option;
 
-    public $selectedFieldType;
     public $fieldTypes;
 
     public $fieldTitle;
     public $fieldKey;
+    public $selectedFieldType;
+    public $fieldForm;
+    public $fieldProps;
 
-    use HasDynamicSettings;
+    public $refresh = false;
 
     public function mount()
     {
@@ -26,16 +31,36 @@ class Management extends \Livewire\Component
         $this->fieldTitle = "";
         $this->fieldKey = "";
         $this->fieldTypes = config("settings-ui.field_types", []);
+        $this->fieldForm = "";
+        $this->fieldProps = [];
     }
 
-    public function updatedSelectedFieldType()
+    public function updatedSelectedFieldType($value)
     {
-        $this->fieldForm = $this->selectedFieldType == '' ?
+        $this->fieldProps = [];
+        $this->fieldForm = $value == '' ?
         '' :
         (
-            method_exists($this->selectedFieldType, "propertiesForm") ?
-            $this->selectedFieldType::propertiesForm() :
+            method_exists($value, "propertiesForm") ?
+            $value::propertiesForm() :
             ''
+        );
+    }
+
+    public function delete($key)
+    {
+        Settings::delete($key);
+        $this->refresh = !$this->refresh;
+    }
+
+    public function addNewField()
+    {
+        Settings::create(
+            $this->fieldKey,
+            "",
+            $this->fieldTitle,
+            $this->selectedFieldType,
+            json_encode($this->fieldProps)
         );
     }
 

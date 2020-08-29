@@ -3,6 +3,7 @@
 namespace Paksuco\Settings\Services;
 
 use Exception;
+use Paksuco\Settings\Fields\TextInput;
 use Paksuco\Settings\Models\Option;
 
 class Settings
@@ -15,9 +16,9 @@ class Settings
      *
      * @return  string           The correspoding value
      */
-    public static function get($key, $default = null)
+    public static function get($fieldKey, $default = null)
     {
-        $option = Option::where("field_name", "=", $key)->get();
+        $option = Option::where("field_key", "=", $fieldKey)->get();
 
         if ($option->count() > 0) {
             return $option->first()->field_value;
@@ -37,7 +38,7 @@ class Settings
      */
     public static function set($key, $value)
     {
-        $option = Option::where("field_name", "=", $key)->get();
+        $option = Option::where("field_key", "=", $key)->get();
         if ($option->count() > 0) {
             $option = $option->first();
             $option->field_value = $value;
@@ -47,5 +48,30 @@ class Settings
         }
 
         throw new Exception("Option $key doesn't exist.");
+    }
+
+    public static function delete($key)
+    {
+        return Option::where("field_key", "=", $key)->delete();
+    }
+
+    public static function exists($key)
+    {
+        return Option::where("field_key", "=", $key)->count() > 0;
+    }
+
+    public static function create($key, $value, $title, $type = TextInput::class, $properties = [])
+    {
+        if (Settings::exists($key)) {
+            return false;
+        }
+
+        $option = new Option();
+        $option->field_key = $key;
+        $option->field_title = $title;
+        $option->field_type = $type;
+        $option->field_properties = $properties;
+        $option->field_value = $value;
+        $option->save();
     }
 }
