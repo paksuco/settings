@@ -2,7 +2,9 @@
 
 namespace Paksuco\Settings\Controllers;
 
-class SettingsController extends \App\Http\Controllers\Controller
+use Illuminate\Routing\Controller as BaseController;
+
+class SettingsController extends BaseController
 {
     public function settings()
     {
