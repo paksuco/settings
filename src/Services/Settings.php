@@ -18,10 +18,13 @@ class Settings
      */
     public static function get($fieldKey, $default = null)
     {
-        $option = Option::where("field_key", "=", $fieldKey)->get();
+        try {
+            $option = Option::where("field_key", "=", $fieldKey)->get();
+            if ($option->count() > 0) {
+                return $option->first()->field_value;
+            }
+        } catch (\Throwable $ex) {
 
-        if ($option->count() > 0) {
-            return $option->first()->field_value;
         }
 
         return $default;
