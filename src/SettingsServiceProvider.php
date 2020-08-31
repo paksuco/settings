@@ -67,7 +67,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__ . '/../config/settings-ui.php';
 
-        $this->publishes([$configPath => base_path('config/settings-ui.php')]);
+        $this->publishes([$configPath => base_path('config/settings-ui.php')], "config");
 
         $this->mergeConfigFrom($configPath, 'settings-ui');
     }
@@ -81,7 +81,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../views', 'paksuco-settings');
 
-        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-settings')]);
+        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-settings')], "views");
 
         Livewire::component("paksuco-settings::settings", Components\Settings::class);
         Livewire::component("paksuco-settings::management", Components\Management::class);
@@ -95,7 +95,7 @@ class SettingsServiceProvider extends ServiceProvider
 
     private function handleMigrations()
     {
-        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
+        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')], "migrations");
     }
 
     private function handleRoutes()
