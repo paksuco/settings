@@ -23,6 +23,7 @@
         "title" => $option->field_title,
         "key" => $option->field_key,
         "model" => "values.".$option->field_key,
+        "props" => json_decode($option->field_properties, true),
         "value" => $option->field_value
         ], key($option->field_key))
     </div>

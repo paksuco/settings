@@ -22,8 +22,6 @@ class Management extends \Livewire\Component
     public $fieldForm;
     public $fieldProps;
 
-    public $refresh = false;
-
     public function mount()
     {
         $this->options = Option::all();
@@ -50,7 +48,7 @@ class Management extends \Livewire\Component
     public function delete($key)
     {
         Settings::delete($key);
-        $this->refresh = !$this->refresh;
+        $this->options = Option::all();
     }
 
     public function addNewField()
@@ -62,6 +60,7 @@ class Management extends \Livewire\Component
             $this->selectedFieldType,
             json_encode($this->fieldProps)
         );
+        $this->options = Option::all();
     }
 
     public function updatedFieldTitle()

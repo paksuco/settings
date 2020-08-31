@@ -47,32 +47,36 @@
         <table class="table text-sm border-collapse w-full">
             <thead>
                 <tr>
-                    <th class="bg-gray-700 py-1 px-3 text-left font-normal border-white border-2 text-white">Field Title
+                    <th class="bg-cool-gray-300 py-1 px-2 text-left font-normal text-cool-gray-800">Field Title
                     <br>Field Key
                     </th>
-                    <th class="bg-gray-700 py-1 px-3 text-left font-normal border-white border-2 text-white">Field Type
+                    <th class="bg-cool-gray-300 py-1 px-2 text-left font-normal text-cool-gray-800">Field Type
                     </th>
-                    <th class="bg-gray-700 py-1 px-3 text-left font-normal border-white border-2 text-white">Field
+                    <th class="bg-cool-gray-300 py-1 px-2 text-left font-normal text-cool-gray-800">Field
                         Properties</th>
-                    <th class="bg-gray-700 py-1 px-3 text-left font-normal border-white border-2 text-white">Actions</th>
+                    <th class="bg-cool-gray-300 py-1 px-2 text-left font-normal text-cool-gray-800">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($options as $option)
-                <tr class="{{ $loop->last == false ? 'border-b' : '' }}">
-                    <td class="p-3">{{$option->field_title}}<br>{{$option->field_key}}</td>
-                    <td class="p-3">{{class_basename($option->field_type)}}</td>
-                    <td class="p-3 whitespace-pre-line font-mono">@php print_r(json_decode($option->field_properties)); @endphp</td>
-                    <td class="p-3">
+                <tr class="border-cool-gray-300 {{ $loop->last == false ? 'border-b' : '' }}">
+                    <td class="p-2 w-1/3 whitespace-no-wrap"><b class="text-lg font-semibold">
+                        {{$option->field_title}}
+                    </b><br>{{$option->field_key}}</td>
+                    <td class="p-2 w-1/3 bg-cool-gray-100 whitespace-no-wrap">{{class_basename($option->field_type)}}</td>
+                    <td class="p-2 w-1/3 whitespace-no-wrap">@dump(json_decode($option->field_properties))</td>
+                    <td class="p-2  bg-cool-gray-100 whitespace-no-wrap">
                         <button
-                    type="button"
-                    wire:click="edit('{{$option->field_key}}')"
-                    class="btn-primary transition duration-300 ease-in-out focus:outline-none
-                    focus:shadow-outline text-blue-700 hover:text-blue-900
-                    font-normal rounded p-1">
-                    <i class="fa fa-pencil"></i>
-                </button>
-                        <button type="button" wire:click='delete("{{$option->field_key}}")'>Delete</button>
+                            type="button"
+                            wire:click="edit('{{$option->field_key}}')"
+                            class="shadow bg-blue-700 hover:bg-indigo-400 whitespace-no-wrap focus:shadow-outline
+                            focus:outline-none text-white font-bold py-2 px-3 rounded">
+                            <i class="fa fa-pen mr-2"></i>@lang("Edit")
+                        </button>
+                        <button type="button" wire:click="delete('{{$option->field_key}}')"
+                            class="shadow bg-red-700 hover:bg-indigo-400 whitespace-no-wrap focus:shadow-outline
+                            focus:outline-none text-white font-bold py-2 px-3 rounded">
+                            <i class="fa fa-trash-alt mr-2"></i>@lang("Delete")</button>
                     </td>
                 </tr>
                 @empty
