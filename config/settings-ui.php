@@ -23,6 +23,7 @@ return [
 
     'field_types' => [
         \Paksuco\Settings\Fields\TextInput::class,
+        \Paksuco\Settings\Fields\Textarea::class,
         \Paksuco\Settings\Fields\SelectInput::class,
         \Paksuco\Settings\Fields\Repeater::class,
         \Paksuco\Settings\Fields\Checkbox::class
