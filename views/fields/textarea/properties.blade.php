@@ -6,6 +6,20 @@
 ], key("text-input-props-maxlength".$random))
 
 @livewire("paksuco-settings::textinput", [
+    "title" => "Columns",
+    "key" => "cols",
+    "model" => "fieldProps.cols",
+    "value" => ""
+], key("text-input-props-cols".$random))
+
+@livewire("paksuco-settings::textinput", [
+    "title" => "Rows",
+    "key" => "rows",
+    "model" => "fieldProps.rows",
+    "value" => ""
+], key("text-input-props-rows".$random))
+
+@livewire("paksuco-settings::textinput", [
     "title" => "Default Value",
     "key" => "default",
     "model" => "fieldProps.default",

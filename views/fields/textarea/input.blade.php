@@ -4,6 +4,8 @@
             {{isset($tiProps['required']) && $tiProps['required'] == true ? 'required' : ''}}
             {{isset($tiProps['disabled']) && $tiProps['disabled'] == true ? 'disabled="disabled"' : ''}}
             {{isset($tiProps['maxlength']) ? 'maxlength="'. $tiProps['maxlength'] . '"' : ''}}
+            {{isset($tiProps['rows']) ? 'rows='. $tiProps['rows'] : ''}}
+            {{isset($tiProps['cols']) ? 'cols='. $tiProps['cols'] : ''}}
             name="{{$tiKey}}"
             class='bg-white border w-full block rounded shadow
         placeholder-gray-800 py-2 px-3 text-gray-700 flex-1 leading-tight
