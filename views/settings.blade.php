@@ -1,6 +1,6 @@
 @extends($extends)
 @section("content")
-<div class="p-8 bg-white border-t">
+<div class="p-8 border-t">
     <div class="w-full items-end">
         <h2 class="text-3xl font-semibold mb-3" style="line-height: 1em">@lang("Site Settings")</h2>
         <p class="text-gray-600 font-light leading-5 mb-4 text-sm">Lorem ipsum dolor sit amet, consectetur

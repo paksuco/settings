@@ -1,11 +1,13 @@
-<div class="py-4 border-b">
+<div class="py-4 container mr-auto">
     <style>
         .settings-input {
             display: flex;
             align-items: center;
+            margin-bottom: 0;
+            padding: 0;
         }
         .settings-input > label {
-            flex-basis: 30%;
+            flex-basis: 25%;
             margin-bottom: 0;
             font-weight: 500;
         }
@@ -14,7 +16,7 @@
         }
     </style>
     @foreach($options as $option)
-    <div>
+    <div class="rounded-lg bg-white mb-2 p-4">
         @php
         $component = "paksuco-settings::" .
         strtolower(class_basename($option->field_type));
