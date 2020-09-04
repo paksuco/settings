@@ -1,6 +1,6 @@
 <div class='w-full md:w-full px-3 mb-4 settings-input'>
     <label class='font-semibold mb-2'>{{$tiTitle}}</label>
-    <input wire:model.debounce.500ms='tiValue' {{isset($tiProps['readonly']) ? 'readonly' : ''}}
+    <input wire:model.debounce.500ms='tiValue' {{isset($tiProps['readonly']) ? 'readonly' : ''}} x-ref="{{$tiModel}}"
             {{isset($tiProps['required']) && $tiProps['required'] == true ? 'required' : ''}}
             {{isset($tiProps['disabled']) && $tiProps['disabled'] == true ? 'disabled="disabled"' : ''}}
             {{isset($tiProps['default']) ? 'value="'. $tiProps['default'] . '"' : ''}}

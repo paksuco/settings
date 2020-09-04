@@ -86,6 +86,10 @@ class SettingsServiceProvider extends ServiceProvider
         Livewire::component("paksuco-settings::settings", Components\Settings::class);
         Livewire::component("paksuco-settings::management", Components\Management::class);
 
+        $this->loadViewComponentsAs("paksuco-settings", [
+            Components\Alert::class
+        ]);
+
         $fieldTypes = config("settings-ui.field_types", []);
 
         foreach ($fieldTypes as $fieldType) {
