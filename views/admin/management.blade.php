@@ -1,5 +1,5 @@
 <div class="flex">
-    <div class="w-full md:w-1/4 p-6 bg-cool-gray-100 rounded">
+    <div class="w-full md:w-60 flex-shrink-0 p-6 bg-cool-gray-100 rounded">
         <h3 class="text-2xl font-semibold mb-3" style="line-height: 1em">@lang("Add new Field")</h3>
         <div class='flex flex-wrap -mx-3 text-sm'>
             @livewire("paksuco-settings::textinput", [
@@ -42,7 +42,7 @@
         </div>
 
     </div>
-    <div class="w-full md:w-3/4 p-6">
+    <div class="flex-1 p-6">
         <h3 class="text-2xl font-semibold mb-3" style="line-height: 1em">@lang("Defined Fields")</h3>
         <table class="table text-sm border-collapse w-full">
             <thead>

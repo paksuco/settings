@@ -30,10 +30,12 @@ abstract class SettingsField extends Component
 
     public function updatedTiValue()
     {
-        $this->emitUp("settings-ui::updated", [
-            "model" => $this->tiModel,
-            "value" => $this->tiValue,
-        ]);
+        if (!empty($this->tiModel)) {
+            $this->emitUp("settings-ui::updated", [
+                "model" => $this->tiModel,
+                "value" => $this->tiValue,
+            ]);
+        }
     }
 
     abstract public static function propertiesForm();

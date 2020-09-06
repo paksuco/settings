@@ -1,8 +1,11 @@
 <div class='w-full md:w-full px-3 mb-2 settings-input'>
     <label class="inline-flex items-center mt-3">
-        <input type="checkbox" name="{{$tiKey}}" wire:model="{{$tiModel}}" x-ref="{{$tiModel}}"
+        <input
+            type="checkbox"
+            name="{{$tiKey}}"
+            x-ref="{{$tiKey}}"
             class="form-checkbox shadow h-5 w-5 text-indigo-600"
-            wire:model.debounce.500ms='tiValue'
+            @if(!empty($tiModel)) wire:model.debounce.500ms='tiValue' @endif
             {{isset($tiProps['readonly']) ? 'readonly' : ''}}
             {{isset($tiProps['required']) ? 'required' : ''}}
             {{isset($tiProps['disabled']) ? 'disabled="disabled"' : ''}}

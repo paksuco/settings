@@ -1,6 +1,7 @@
 <div class='w-full md:w-full px-3 mb-4 settings-input'>
     <label class='font-semibold mb-2'>{{$tiTitle}}</label>
-    <textarea wire:model.debounce.500ms='tiValue' {{isset($tiProps['readonly']) ? 'readonly' : ''}} x-ref="{{$tiModel}}"
+    <textarea
+       @if(!empty($tiModel)) wire:model.debounce.500ms='tiValue' @endif {{isset($tiProps['readonly']) ? 'readonly' : ''}} x-ref="{{$tiKey}}"
             {{isset($tiProps['required']) && $tiProps['required'] == true ? 'required' : ''}}
             {{isset($tiProps['disabled']) && $tiProps['disabled'] == true ? 'disabled="disabled"' : ''}}
             {{isset($tiProps['maxlength']) ? 'maxlength="'. $tiProps['maxlength'] . '"' : ''}}
