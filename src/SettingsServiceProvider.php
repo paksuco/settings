@@ -31,12 +31,10 @@ class SettingsServiceProvider extends ServiceProvider
 
         Event::listen("paksuco.menu.beforeRender", function ($key, $container) {
             if ($key == "admin") {
-                if ($container->hasItem("Settings") == false) {
-                    $container->addItem("Settings", "#", "fa fa-tools", function ($menu) {
-                        $menu->addItem("Configuration", route("paksuco.settings.admin"), "fa fa-cogs")
-                            ->addItem("Fields", route("paksuco.settings.management"), "fa fa-cog");
-                    });
-                }
+                $container->addItem("Settings", "#", "fa fa-tools", function ($menu) {
+                    $menu->addItem("Configuration", route("paksuco.settings.admin"), "fa fa-cogs")
+                        ->addItem("Fields", route("paksuco.settings.management"), "fa fa-cog");
+                });
             }
         });
 
@@ -84,6 +82,7 @@ class SettingsServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-settings')], "views");
 
         Livewire::component("paksuco-settings::settings", Components\Settings::class);
+        Livewire::component("paksuco-settings::editor", Components\Editor::class);
         Livewire::component("paksuco-settings::management", Components\Management::class);
 
         $this->loadViewComponentsAs("paksuco-settings", [

@@ -2,8 +2,6 @@
 
 namespace Paksuco\Settings\Traits;
 
-use Paksuco\Settings\Facades\Settings;
-
 trait HasDynamicSettings
 {
     public function __construct($id)
