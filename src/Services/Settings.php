@@ -22,9 +22,11 @@ class Settings
             $option = Option::where("field_key", "=", $fieldKey)->get();
             if ($option->count() > 0) {
                 return $option->first()->field_value;
+            } else {
+                static::create($fieldKey, $default, \Illuminate\Support\Str::title($fieldKey));
             }
         } catch (\Throwable $ex) {
-
+            report($ex);
         }
 
         return $default;
