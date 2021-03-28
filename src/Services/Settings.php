@@ -26,7 +26,7 @@ class Settings
                 static::create($fieldKey, $default, \Illuminate\Support\Str::title($fieldKey));
             }
         } catch (\Throwable $ex) {
-            report($ex);
+            //report($ex);
         }
 
         return $default;
@@ -75,7 +75,7 @@ class Settings
         $option->field_key = $key;
         $option->field_title = $title;
         $option->field_type = $type;
-        $option->field_properties = $properties;
+        $option->field_properties = !is_string($properties) ? json_encode($properties) : $properties;
         $option->field_value = $value;
         $option->save();
     }
