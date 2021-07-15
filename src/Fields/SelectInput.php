@@ -4,6 +4,10 @@ namespace Paksuco\Settings\Fields;
 
 class SelectInput extends SettingsField
 {
+    public $fieldRules = [
+        "items" => "required|array"
+    ];
+
     public static function getFieldName()
     {
         return "Select Input";

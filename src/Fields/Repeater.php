@@ -10,6 +10,8 @@ class Repeater extends SettingsField
 
     public $valueInput;
 
+    public $fieldRules = [];
+
     public function mount($title, $key, $value, $model, $props = [])
     {
         parent::mount($title, $key, $value, $model, $props);

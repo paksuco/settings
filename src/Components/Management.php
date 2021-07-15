@@ -12,7 +12,7 @@ class Management extends \Livewire\Component
     use HasDynamicSettings;
 
     public $options;
-    public $option;
+    public $optionId;
 
     public $fieldTypes;
 
@@ -25,12 +25,24 @@ class Management extends \Livewire\Component
     public function mount()
     {
         $this->options = Option::all();
-        $this->option = null;
+        $this->clearSelection();
+    }
+
+    public function updated($name, $value)
+    {
+        $this->emit('settings-ui::'.$name.'-updated', ['value' => $value]);
+    }
+
+    public function clearSelection()
+    {
+        $this->optionId = null;
         $this->fieldTitle = "";
         $this->fieldKey = "";
         $this->fieldTypes = config("settings-ui.field_types", []);
         $this->fieldForm = "";
         $this->fieldProps = [];
+        $this->selectedFieldType = null;
+        $this->updateSubFields();
     }
 
     public function updatedSelectedFieldType($value)
@@ -51,16 +63,81 @@ class Management extends \Livewire\Component
         $this->options = Option::all();
     }
 
+    public function edit($key)
+    {
+        $option = $this->options->where('field_key', $key)->first();
+        $this->optionId = $option->id;
+        $this->fieldTitle = $option->field_title;
+        $this->fieldKey = $option->field_key;
+        $this->fieldType = $option->field_type;
+        $this->selectedFieldType = $option->field_type;
+        $this->fieldProps = json_decode($option->field_properties, true);
+        $handler = new $option->field_type;
+        $this->fieldForm = method_exists($handler, "propertiesForm")
+            ? $handler::propertiesForm()
+            : '';
+        $this->updateSubFields();
+    }
+
+    public function updateSubFields()
+    {
+
+        $update = [
+            "field_title" => $this->fieldTitle,
+            "field_key" => $this->fieldKey,
+            "field_type" => $this->selectedFieldType
+        ];
+        foreach ($this->fieldProps as $key => $value) {
+             $update[$key] = $value;
+        }
+        $this->emit('settings-ui::triggerUpdate', $update);
+    }
+
     public function addNewField()
     {
-        Settings::create(
-            $this->fieldKey,
-            "",
-            $this->fieldTitle,
-            $this->selectedFieldType,
-            json_encode($this->fieldProps)
-        );
+        if ($this->optionId == null) {
+            $this->validate([
+                "fieldKey" => "required|string|min:1|unique:options,field_key",
+                "fieldTitle" => "required|string",
+                "selectedFieldType" => "required|in:" . implode(",", $this->fieldTypes)
+                ]);
+                $this->validateSelectedFieldType();
+            Settings::create(
+                $this->fieldKey,
+                "",
+                $this->fieldTitle,
+                $this->selectedFieldType,
+                json_encode($this->fieldProps)
+            );
+        } else {
+            $this->validate([
+            "fieldKey" => "required|string|min:1|unique:options,field_key,{$this->optionId},id",
+            "fieldTitle" => "required|string",
+            "selectedFieldType" => "required|in:" . implode(",", $this->fieldTypes)
+            ]);
+            $this->validateSelectedFieldType();
+            $setting = Option::find($this->optionId);
+            $setting->field_key = $this->fieldKey;
+            $setting->field_title = $this->fieldTitle;
+            $setting->field_type = $this->selectedFieldType;
+            $setting->field_properties = json_encode($this->fieldProps);
+            $setting->save();
+            $this->fieldTitle = "";
+            $this->fieldKey = "";
+            $this->fieldForm = "";
+            $this->fieldProps = [];
+            $this->selectedFieldType = null;
+            $this->optionId = null;
+        }
+        session()->flash('success', __("Setting created"));
+        $this->clearSelection();
         $this->options = Option::all();
+    }
+
+    public function validateSelectedFieldType()
+    {
+        $instance = new $this->selectedFieldType();
+        $instance->validateFields($this->fieldProps);
     }
 
     public function updatedFieldTitle()

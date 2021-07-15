@@ -4,6 +4,13 @@ namespace Paksuco\Settings\Fields;
 
 class Checkbox extends SettingsField
 {
+    public $fieldRules = [
+        "required" => "boolean",
+        "disabled" => "boolean",
+        "default" => "boolean",
+        "readonly" => "boolean"
+    ];
+
     public static function getFieldName()
     {
         return "Checkbox";

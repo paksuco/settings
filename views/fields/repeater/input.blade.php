@@ -49,11 +49,11 @@
         </tbody>
     </table>
     <label class='mb-2 font-semibold'>@lang('Key')</label>
-    <input wire:model.debounce.500ms='keyInput'
+    <input wire:model.lazy='keyInput'
         class='relative flex-1 block w-full min-w-0 px-3 py-2 mb-4 text-sm leading-tight text-gray-700 placeholder-gray-800 bg-white border rounded shadow focus:border-cool-gray-300 border-cool-gray-200 focus:outline-none'
         type='text'>
     <label class='mb-2 font-semibold'>@lang('Value')</label>
-    <input wire:model.debounce.500ms='valueInput'
+    <input wire:model.lazy='valueInput'
         class='relative flex-1 block w-full min-w-0 px-3 py-2 mb-4 text-sm leading-tight text-gray-700 placeholder-gray-800 bg-white border rounded shadow focus:border-cool-gray-300 border-cool-gray-200 focus:outline-none'
         type='text'>
     <button type="button"
