@@ -3,6 +3,7 @@
 namespace Paksuco\Settings\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Paksuco\Settings\Fields\TextInput;
 use Paksuco\Settings\Models\Option;
 
@@ -18,12 +19,16 @@ class Settings
      */
     public static function get($fieldKey, $default = null)
     {
+        if (Cache::has("settings::$fieldKey")) {
+            return Cache::get("settings::$fieldKey");
+        }
         try {
             $option = Option::where("field_key", "=", $fieldKey)->get();
             if ($option->count() > 0) {
+                Cache::add("settings::$fieldKey", $option->first()->field_value, 6 * 60 * 60);
                 return $option->first()->field_value;
             } else {
-                static::create($fieldKey, $default, \Illuminate\Support\Str::title($fieldKey));
+                Cache::add("settings::$fieldKey", $default, 6 * 60 * 60);
             }
         } catch (\Throwable $ex) {
             //report($ex);
@@ -49,6 +54,8 @@ class Settings
             $option->field_value = $value;
             $option->save();
 
+            Cache::add("settings::$key", $value, 6 * 60 * 60);
+
             return true;
         }
 
@@ -57,6 +64,7 @@ class Settings
 
     public static function delete($key)
     {
+        Cache::forget("settings::$key");
         return Option::where("field_key", "=", $key)->delete();
     }
 
@@ -78,5 +86,7 @@ class Settings
         $option->field_properties = !is_string($properties) ? json_encode($properties) : $properties;
         $option->field_value = $value;
         $option->save();
+
+        Cache::create("settings::$key", $value);
     }
 }
