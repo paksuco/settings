@@ -9,11 +9,11 @@ trait HasDynamicSettings
         parent::__construct($id);
 
         $this->listeners = array_merge($this->listeners, [
-            "settings-ui::updated" => "updateMember",
+            "settings-ui::updated" => "updatesMember",
         ]);
     }
 
-    public function updateMember($args)
+    public function updatesMember($args)
     {
         $model = $args["model"];
         $value = $args["value"];

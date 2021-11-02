@@ -34,7 +34,7 @@ abstract class SettingsField extends Component
         $this->tiModel = $model;
 
         $this->random = Str::random(6);
-        $this->updatedTiValue();
+        $this->TIValueUpdate();
     }
 
     public function getListeners()
@@ -52,7 +52,7 @@ abstract class SettingsField extends Component
         $this->render();
     }
 
-    public function updatedTiValue()
+    public function TIValueUpdate()
     {
         if (!empty($this->tiModel)) {
             $this->emitUp(
@@ -63,6 +63,11 @@ abstract class SettingsField extends Component
                 ]
             );
         }
+    }
+
+    public function updatedTiValue()
+    {
+        $this->TIValueUpdate();
     }
 
     public function validateFields($values)
